@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4lrawim3wk57"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_05spo"]
+[ext_resource type="Texture2D" uid="uid://b6b2ro35jdq8p" path="res://icon.svg" id="1_t3uuv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdoy5"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_05spo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.145098, 0.309804, 0.333333, 0)
+shape = SubResource("RectangleShape2D_gdoy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_t3uuv")
+
+[node name="UpDashTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="DownDashTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="LeftDashTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="RightDashTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="UpDashTimer" to="." method="_on_up_dash_timer_timeout"]
+[connection signal="timeout" from="DownDashTimer" to="." method="_on_down_dash_timer_timeout"]
+[connection signal="timeout" from="LeftDashTimer" to="." method="_on_left_dash_timer_timeout"]
+[connection signal="timeout" from="RightDashTimer" to="." method="_on_right_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]

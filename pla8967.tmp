@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4lrawim3wk57"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_05spo"]
+[ext_resource type="Texture2D" uid="uid://b6b2ro35jdq8p" path="res://icon.svg" id="1_t3uuv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdoy5"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_05spo")
+speed = null
+dash_speed = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.145098, 0.309804, 0.333333, 0)
+shape = SubResource("RectangleShape2D_gdoy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_t3uuv")
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
